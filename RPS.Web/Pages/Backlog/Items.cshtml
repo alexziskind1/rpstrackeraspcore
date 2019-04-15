@@ -6,15 +6,13 @@
     <h1 class="h2">Backlog</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button onclick="location.href = '@(Url.Action("Items", "Backlog", new { preset = "My" }))'">My Items</button>
-            <button onclick="location.href = '@(Url.Action("Items", "Backlog", new { preset = "Open" }))'">Open Items</button>
-            <button onclick="location.href = '@(Url.Action("Items", "Backlog", new { preset = "Closed" }))'">Done Items</button>
+            <a class="btn btn-secondary" asp-page="Items" asp-route-Preset="My">My Items</a>
+            <a class="btn btn-secondary" asp-page="Items" asp-route-Preset="Open">Open Items</a>
+            <a class="btn btn-secondary" asp-page="Items" asp-route-Preset="Closed">Done Items</a>
         </div>
 
         <div class="btn-group mr-2">
-            <button onclick="location.href = '@(Url.Action("Create", "Backlog"))'">Add</button>
-            <button asp-action="OnGet">On get</button>
-            <a class="btn btn-secondary">On get ach</a>
+            <a class="btn btn-secondary" asp-page="Create">Add</a>
         </div>
 
     </div>

@@ -28,8 +28,13 @@ namespace RPS.Web.Pages.Backlog
             rpsItemsRepo = rpsItemsData;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (!Preset.HasValue)
+            {
+                return RedirectToPage("Items", new { Preset = PresetEnum.Open });
+            }
+
             IEnumerable<PtItem> items = null;
             switch (Preset)
             {
@@ -47,6 +52,8 @@ namespace RPS.Web.Pages.Backlog
                     break;
             }
             Items = items.ToList();
+
+            return Page();
         }
     }
 }

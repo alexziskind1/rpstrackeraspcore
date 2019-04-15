@@ -33,15 +33,17 @@ namespace RPS.Web.Pages.Backlog
             rpsCommentsRepo = rpsCommentsData;
         }
 
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
-            var item = rpsItemsRepo.GetItemById(id);
+            Item = rpsItemsRepo.GetItemById(id);
             var users = rpsUserRepo.GetAll();
             var currentUser = users.Single(u => u.Id == CURRENT_USER_ID);
 
             //ViewBag.screen = DetailScreenEnum.Details;
             //ViewBag.users = users;
             //ViewBag.currentUser = currentUser;
+
+            return Page();
         }
     }
 }
