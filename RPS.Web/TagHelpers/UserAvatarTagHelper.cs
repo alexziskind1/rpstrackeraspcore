@@ -24,7 +24,7 @@ namespace RPS.Web.TagHelpers
                 cl = className;
             }
 
-            output.Attributes.Add("src", User.Avatar);
+            output.Attributes.Add("src", "/" + User.Avatar);
             output.Attributes.Add("class", cl);
             output.Attributes.Add("alt", User.FullName);
 

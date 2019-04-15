@@ -1,5 +1,5 @@
-﻿@page
-@model RPS.Web.Pages.BacklogModel
+﻿@page "/Backlog/{Preset?}"
+@model RPS.Web.Pages.Backlog.ItemsModel
 
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
@@ -13,6 +13,8 @@
 
         <div class="btn-group mr-2">
             <button onclick="location.href = '@(Url.Action("Create", "Backlog"))'">Add</button>
+            <button asp-action="OnGet">On get</button>
+            <a class="btn btn-secondary">On get ach</a>
         </div>
 
     </div>
@@ -34,7 +36,7 @@
         <tbody>
             @foreach (var item in Model.Items)
             {
-                <tr class="pt-table-row" onclick="location.href = '@(Url.Action("Details", new { id = item.Id }))'">
+                <tr class="pt-table-row" onclick="location.href = '/@item.Id/Details'">
 
                     <td>
                         <item-type-indicator item-type="@item.Type" class="backlog-icon"></item-type-indicator>
@@ -61,5 +63,4 @@
 @section styles {
     <link href="~/css/backlog.css" rel="stylesheet" />
 }
-
 
