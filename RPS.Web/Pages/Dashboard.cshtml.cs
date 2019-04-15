@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace core_test.Pages
+namespace RPS.Web.Pages
 {
     public class DashboardModel : PageModel
     {
