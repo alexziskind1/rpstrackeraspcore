@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RPS.Core.Models;
 using RPS.Data;
+using RPS.Web.Models.Routing;
 
 namespace RPS.Web.Pages.Backlog
 {
@@ -19,6 +20,9 @@ namespace RPS.Web.Pages.Backlog
         private readonly IPtCommentsRepository rpsCommentsRepo;
 
         public PtItem Item { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public DetailScreenEnum Screen { get; set; }
 
 
         public DetailsModel(
@@ -39,7 +43,7 @@ namespace RPS.Web.Pages.Backlog
             var users = rpsUserRepo.GetAll();
             var currentUser = users.Single(u => u.Id == CURRENT_USER_ID);
 
-            //ViewBag.screen = DetailScreenEnum.Details;
+            //ViewData.Add("screen", DetailScreenEnum.Details);
             //ViewBag.users = users;
             //ViewBag.currentUser = currentUser;
 
