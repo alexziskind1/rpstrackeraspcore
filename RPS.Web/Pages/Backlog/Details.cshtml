@@ -21,13 +21,13 @@
     switch (Model.Screen)
     {
         case DetailScreenEnum.Details:
-            <partial name="_Details" />
+            <partial name="_Details" model="@Model.DetailsFormVm" />
             break;
         case DetailScreenEnum.Tasks:
-            <partial name="_Tasks" />
+            <partial name="_Tasks" model="@Model.TasksFormVm" />
             break;
         case DetailScreenEnum.Chitchat:
-            <partial name="_Chitchat" />
+            <partial name="_Chitchat" model="@Model.ChitchatFormVm" />
             break;
     }
 }

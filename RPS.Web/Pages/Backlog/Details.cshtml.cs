@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RPS.Core.Models;
+using RPS.Core.Models.Dto;
 using RPS.Data;
 using RPS.Web.Models.Routing;
 
@@ -24,6 +25,17 @@ namespace RPS.Web.Pages.Backlog
         [BindProperty(SupportsGet = true)]
         public DetailScreenEnum Screen { get; set; }
 
+        public List<PtUser> Users { get; set; }
+
+        [BindProperty]
+        public PtItemDetailsVm DetailsFormVm { get; set; }
+
+        [BindProperty]
+        public PtItemTasksVm TasksFormVm { get; set; }
+
+        [BindProperty]
+        public PtItemCommentsVm ChitchatFormVm { get; set; }
+
 
         public DetailsModel(
             IPtUserRepository rpsUserData,
@@ -40,14 +52,59 @@ namespace RPS.Web.Pages.Backlog
         public IActionResult OnGet(int id)
         {
             Item = rpsItemsRepo.GetItemById(id);
-            var users = rpsUserRepo.GetAll();
-            var currentUser = users.Single(u => u.Id == CURRENT_USER_ID);
+            Users = rpsUserRepo.GetAll().ToList();
+            var currentUser = Users.Single(u => u.Id == CURRENT_USER_ID);
 
-            //ViewData.Add("screen", DetailScreenEnum.Details);
-            //ViewBag.users = users;
-            //ViewBag.currentUser = currentUser;
+            DetailsFormVm = new PtItemDetailsVm(Item, Users);
+            TasksFormVm = new PtItemTasksVm(Item);
+            ChitchatFormVm = new PtItemCommentsVm(Item, currentUser);
 
             return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            switch (Screen)
+            {
+                case DetailScreenEnum.Details:
+                    SaveDetails();
+                    break;
+                case DetailScreenEnum.Tasks:
+                    SaveTask();
+                    break;
+                case DetailScreenEnum.Chitchat:
+                    SaveComment();
+                    break;
+            }
+            return RedirectToPage("Details", new { id = DetailsFormVm.Id, Screen });
+        }
+
+        private void SaveDetails()
+        {
+            var updatedItem = rpsItemsRepo.UpdateItem(DetailsFormVm.ToPtUpdateItem());
+        }
+
+        private void SaveTask()
+        {
+            PtNewTask taskNew = new PtNewTask
+            {
+                ItemId = TasksFormVm.ItemId,
+                Title = TasksFormVm.NewTaskTitle
+            };
+
+            rpsTasksRepo.AddNewTask(taskNew);
+        }
+
+        private void SaveComment()
+        {
+            PtNewComment commentNew = new PtNewComment
+            {
+                ItemId = ChitchatFormVm.ItemId,
+                Title = ChitchatFormVm.NewCommentText,
+                UserId = CURRENT_USER_ID
+            };
+
+            rpsCommentsRepo.AddNewComment(commentNew);
         }
     }
 }
