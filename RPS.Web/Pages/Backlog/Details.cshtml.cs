@@ -79,6 +79,27 @@ namespace RPS.Web.Pages.Backlog
             return RedirectToPage("Details", new { id = DetailsFormVm.Id, Screen });
         }
 
+        public IActionResult OnPostUpdate(int taskId, string title, bool? completed)
+        {
+            PtUpdateTask uTask = new PtUpdateTask
+            {
+                Id = taskId,
+                ItemId = DetailsFormVm.Id,
+                Title = title,
+                Completed = completed.HasValue ? completed.Value : false
+            };
+            rpsTasksRepo.UpdateTask(uTask);
+
+            return RedirectToPage("Details", new { id = DetailsFormVm.Id, Screen });
+        }
+
+        public IActionResult OnPostDelete(int taskId)
+        {
+            var result = rpsTasksRepo.DeleteTask(taskId, DetailsFormVm.Id);
+            return RedirectToPage("Details", new { id = DetailsFormVm.Id, Screen });
+        }
+
+
         private void SaveDetails()
         {
             var updatedItem = rpsItemsRepo.UpdateItem(DetailsFormVm.ToPtUpdateItem());
