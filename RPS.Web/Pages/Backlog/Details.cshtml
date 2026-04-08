@@ -16,7 +16,7 @@
                 <div class="Tools d-flex gap-3">
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Details" class="btn btn-light">Details</a>
+                            <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Form" class="btn btn-light">Form</a>
                             <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Tasks" class="btn btn-light">Tasks</a>
                             <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Chitchat" class="btn btn-light">Chitchat</a>
                         </div>
@@ -27,7 +27,7 @@
 @{
     switch (Model.Screen)
     {
-        case DetailScreenEnum.Details:
+        case DetailScreenEnum.Form:
             <partial name="_Details" model="@Model.DetailsFormVm" />
             break;
         case DetailScreenEnum.Tasks:
