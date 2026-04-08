@@ -5,34 +5,32 @@
     var userId = ViewData["userId"];
 }
 
-<div class="dashboard">
+<div class="dashboard-page page">
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-auto">
+                <div class="frame13 d-flex flex-column align-items-start gap-2">
+                    <div class="page-title">Dashboard</div>
+                </div>
+            </div>
 
-        <div class="col-md order-md-first text-center text-md-left">
-            <h2>
-                <span class="small text-uppercase text-muted d-block">Statistics</span>
-                @if (Model.DateStart.HasValue && Model.DateEnd.HasValue)
-                {
-                    <span id="spanFilteredDateRange">
-                        @Model.DateStart.Value.ToString("MMM d, yyyy") - @Model.DateEnd.Value.ToString("MMM d, yyyy")
-                    </span>
-                }
-
-            </h2>
-        </div>
-
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-                <button type="button" class="pt-class-range-filter" data-range="3" onclick="location.href = '/?months=3&userId=@userId'">
-                    3 Months
-                </button>
-                <button type="button" class="pt-class-range-filter" data-range="6" onclick="location.href = '/?months=6&userId=@userId'">
-                    6 Months
-                </button>
-                <button type="button" class="pt-class-range-filter" data-range="12" onclick="location.href = '/?months=12&userId=@userId'">
-                    1 Year
-                </button>
+            <div class="col-auto">
+                <div class="Tools d-flex gap-3">
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group mr-2">
+                            <button type="button" class="btn btn-light" data-range="3" onclick="location.href = '/?months=3&userId=@userId'">
+                                3 Months
+                            </button>
+                            <button type="button" class="btn btn-light" data-range="6" onclick="location.href = '/?months=6&userId=@userId'">
+                                6 Months
+                            </button>
+                            <button type="button" class="btn btn-light" data-range="12" onclick="location.href = '/?months=12&userId=@userId'">
+                                1 Year
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
