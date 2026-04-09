@@ -46,7 +46,7 @@
         <tbody>
             @foreach (var item in Model.Items)
             {
-                <tr class="pt-table-row" onclick="location.href = '/@item.Id/Details'">
+                <tr class="pt-table-row" onclick="location.href = '/Detail/@item.Id'">
 
                     <td>
                         <item-type-indicator item-type="@item.Type" class="backlog-icon"></item-type-indicator>

@@ -1,4 +1,4 @@
-﻿@page "/{id:int}/{screen}"
+﻿@page "/Detail/{id:int}/{screen?}"
 
 @using RPS.Web.Models.Routing;
 @model RPS.Web.Pages.Backlog.DetailsModel
@@ -16,9 +16,9 @@
                 <div class="Tools d-flex gap-3">
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Form" class="btn btn-light">Form</a>
-                            <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Tasks" class="btn btn-light">Tasks</a>
-                            <a asp-page="Details" asp-route-id="@Model.Item.Id" asp-route-screen="Chitchat" class="btn btn-light">Chitchat</a>
+                            <a href="/Detail/@Model.Item.Id" class="btn btn-light">Form</a>
+                            <a href="/Detail/@Model.Item.Id/Tasks" class="btn btn-light">Tasks</a>
+                            <a href="/Detail/@Model.Item.Id/Chitchat" class="btn btn-light">Chitchat</a>
                         </div>
         </div>
     </div>
